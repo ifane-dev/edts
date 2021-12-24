@@ -27,7 +27,7 @@
             <td th:text="${employee.name}"></td>
             <td th:text="${employee.salary}"></td>
             <td th:text="${employee.grade}"></td>
-            <td ></td>
+            <td th:text="${employee.totalBonus}"></td>
             <td>
                 <a th:href="@{'/edit/' + ${employee.id}}">Edit</a>
             </td>

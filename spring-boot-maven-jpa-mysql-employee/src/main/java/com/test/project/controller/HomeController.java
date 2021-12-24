@@ -17,12 +17,12 @@ public class HomeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/employee")
+    @GetMapping("/api/employee")
     public List<EmployeeDTO> list() {
         return employeeService.listAll();
     }
 
-    @GetMapping("/employee/{id}")
+    @GetMapping("/api/employee/{id}")
     public ResponseEntity<Employee> get(@PathVariable Integer id) {
         try {
             Employee employee = employeeService.get(id);
@@ -32,12 +32,12 @@ public class HomeController {
         }
     }
 
-    @PostMapping("/employee")
+    @PostMapping("/api/employee")
     public void add(@RequestBody Employee employee) {
         employeeService.save(employee);
     }
 
-    @PutMapping("/employee/{id}")
+    @PutMapping("/api/employee/{id}")
     public ResponseEntity<?> update(@RequestBody Employee employee, @PathVariable Integer id) {
         try {
             Employee existEmployee = employeeService.get(id);

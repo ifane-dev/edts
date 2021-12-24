@@ -1,11 +1,8 @@
 package com.test.project.domain;
 
-import org.springframework.data.annotation.Transient;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.PostLoad;
 
 @Entity
 public class Employee {
