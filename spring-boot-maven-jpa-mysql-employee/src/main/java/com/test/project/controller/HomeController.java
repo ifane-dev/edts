@@ -33,18 +33,24 @@ public class HomeController {
     }
 
     @PostMapping("/api/employee")
-    public void add(@RequestBody Employee employee) {
-        employeeService.save(employee);
-    }
-
-    @PutMapping("/api/employee/{id}")
-    public ResponseEntity<?> update(@RequestBody Employee employee, @PathVariable Integer id) {
+    public ResponseEntity<Object> add(@RequestBody Employee employee) {
         try {
-            Employee existEmployee = employeeService.get(id);
-            employeeService.save(employee);
-            return new ResponseEntity<>(HttpStatus.OK);
+            final Employee saveEmployee = employeeService.save(employee);
+            return ResponseEntity.ok(saveEmployee);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PutMapping("/api/update/{id}")
+    public ResponseEntity<Employee> update(@PathVariable(value = "id") Long employeeId,
+                                                   @RequestBody Employee employeeDetails) {
+        Employee employee = employeeService.get(employeeId);
+
+        employee.setName(employeeDetails.getName());
+        employee.setSalary(employeeDetails.getSalary());
+        employee.setGrade(employeeDetails.getGrade());
+        final Employee updatedEmployee = employeeService.save(employee);
+        return ResponseEntity.ok(updatedEmployee);
     }
 }

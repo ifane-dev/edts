@@ -7,18 +7,18 @@ import javax.persistence.Id;
 @Entity
 public class Employee {
 
-    private int id;
+    private Long id;
     private String name;
-    private int salary;
+    private double salary;
     private String grade;
 
     @Id
     @GeneratedValue
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -30,11 +30,11 @@ public class Employee {
         this.name = name;
     }
 
-    public int getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class EmployeeService {
             EmployeeDTO dto = new EmployeeDTO();
             dto.setId(emRepo.findAll().get(e).getId());
             dto.setName(emRepo.findAll().get(e).getName());
-            dto.setSalary(emRepo.findAll().get(e).getSalary());
+            dto.setSalary(formatCurrency(emRepo.findAll().get(e).getSalary()));
             dto.setGrade(emRepo.findAll().get(e).getGrade());
 
             if(emRepo.findAll().get(e).getGrade().equals("1")){
@@ -42,36 +43,50 @@ public class EmployeeService {
         return listEm;
     }
 
-    public void save(Employee employee){
+    public Employee save(Employee employee){
         emRepo.save(employee);
+        return employee;
     }
 
     public Employee get(long id){
         return emRepo.findById(id).get();
     }
 
-    private double calculateManager(int e){
+    private String calculateManager(int e){
         double salary = Double.valueOf(emRepo.findAll().get(e).getSalary());
         double pManager = 10.0/100.0;
         double totalsalary = salary + (salary * pManager);
 
-        return totalsalary;
+        return formatCurrency(totalsalary);
     }
 
-    private double calculateSupervisor(int e){
+    private String calculateSupervisor(int e){
         double salary = Double.valueOf(emRepo.findAll().get(e).getSalary());
         double pManager = 6.0/100.0;
         double totalsalary = salary + (salary * pManager);
 
-        return totalsalary;
+        return formatCurrency(totalsalary);
     }
 
-    private double calculateStaff(int e){
+    private String calculateStaff(int e){
         double salary = Double.valueOf(emRepo.findAll().get(e).getSalary());
         double pManager = 3.0/100.0;
         double totalsalary = salary + (salary * pManager);
 
-        return totalsalary;
+        return formatCurrency(totalsalary);
+    }
+
+    private String formatCurrency(double currency){
+        DecimalFormat kurs = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols format = new DecimalFormatSymbols();
+
+        format.setCurrencySymbol("");
+        format.setMonetaryDecimalSeparator(',');
+        format.setGroupingSeparator('.');
+
+        kurs.setDecimalFormatSymbols(format);
+
+        return kurs.format(currency).replaceAll(",00","");
     }
 
 }

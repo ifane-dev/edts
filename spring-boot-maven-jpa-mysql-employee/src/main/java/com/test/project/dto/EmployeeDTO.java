@@ -2,17 +2,17 @@ package com.test.project.dto;
 
 public class EmployeeDTO {
 
-    private int id;
+    private Long id;
     private String name;
-    private int salary;
+    private String salary;
     private String grade;
-    private double totalBonus;
+    private String totalBonus;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -24,11 +24,11 @@ public class EmployeeDTO {
         this.name = name;
     }
 
-    public int getSalary() {
+    public String getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(String salary) {
         this.salary = salary;
     }
 
@@ -40,11 +40,11 @@ public class EmployeeDTO {
         this.grade = grade;
     }
 
-    public double getTotalBonus() {
+    public String getTotalBonus() {
         return totalBonus;
     }
 
-    public void setTotalBonus(double totalBonus) {
+    public void setTotalBonus(String totalBonus) {
         this.totalBonus = totalBonus;
     }
 }
